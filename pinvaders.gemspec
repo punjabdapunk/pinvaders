@@ -6,10 +6,10 @@ require 'pinvaders/version'
 Gem::Specification.new do |gem|
   gem.name          = "pinvaders"
   gem.version       = Pinvaders::VERSION
-  gem.authors       = ["TODO: Write your name"]
-  gem.email         = ["TODO: Write your email address"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["Shazad Rehman"]
+  gem.email         = ["punjabdapunk@gmail.com"]
+  gem.description   = %q{Psychedelic Invaders}
+  gem.summary       = %q{A colorful ASCII version of the ol' classic Space Invaders}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
