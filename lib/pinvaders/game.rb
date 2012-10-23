@@ -1,7 +1,7 @@
 module Pinvaders
   class Game
     def loop
-      put 'start game'
+      puts 'start game'
     end
   end
 end
