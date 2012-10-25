@@ -1,10 +1,12 @@
 require "pinvaders/version"
 require "pinvaders/game"
+require "pinvaders/background"
+require "pinvaders/star"
 require "curses"
 
-module Pinvaders
-  include Curses
+include Curses
 
+module Pinvaders
   pinvaders = Game.new
-  pinvaders.loop
+  pinvaders.do_loop
 end
