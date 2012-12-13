@@ -17,11 +17,17 @@ module Pinvaders
       begin
         loop do
           @background.draw
-
           @background.update
+          @background.refresh
+          if @background.cols != @cols
+            @background = nil
+            @background = Background.new
+            @cols = @background.cols
+            clear
+          end     
           #key = getch
 
-          sleep(1.0 / 24.0) #24 frames per second
+          sleep(1.0 / 48.0) #48 frames per second
         end
       ensure
         close_screen
