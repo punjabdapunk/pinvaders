@@ -10,16 +10,14 @@ module Pinvaders
       end
 
       @type = type
-
       @brush = Painter.new
-
       reset
     end
 
     def reset
       @x = 0 
       @y = 0
-      @lag = rand(Curses::lines * 10)
+      @lag = rand(Curses::lines * 20)
       @brake_count = @brake
     end
 
@@ -64,7 +62,7 @@ module Pinvaders
       addstr(' ')
       if on_screen?
         setpos(@y, @x)
-        addstr(".")
+        @brush.blue { addstr(".") }
       end
     end
 
@@ -73,7 +71,7 @@ module Pinvaders
       addstr(' ')
       if on_screen?
         setpos(@y, @x)
-        addstr('*')
+        @brush.yellow { addstr('*') }
       end
     end
 
@@ -86,14 +84,14 @@ module Pinvaders
       addstr('   ')
       if on_screen?
         setpos(@y, @x)
-        addstr('\\|/')
+        @brush.magenta{ addstr('\\|/') }
         if on_screen?(1)
           setpos(@y + 1, @x) 
-          addstr('-o-')
+          @brush.magenta{ addstr('-o-') }
         end
         if on_screen?(2)
           setpos(@y + 2, @x)
-          addstr('/|\\')
+          @brush.magenta{ addstr('/|\\') }
         end
       end
     end
