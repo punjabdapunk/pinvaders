@@ -1,6 +1,6 @@
 module Pinvaders
   class Star
-    attr_accessor :x, :y, :on_screen, :type
+    attr_accessor :x, :y, :on_screen, :type, :brush
 
     def initialize(speed, type)
       case speed
@@ -10,6 +10,8 @@ module Pinvaders
       end
 
       @type = type
+
+      @brush = Painter.new
 
       reset
     end

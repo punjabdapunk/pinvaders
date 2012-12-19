@@ -7,6 +7,11 @@ module Pinvaders
       noecho
       stdscr.keypad(true)
 
+      if has_colors?
+        start_color
+        use_default_colors
+      end
+
       @lines = Curses::lines
       @cols  = Curses::cols
 

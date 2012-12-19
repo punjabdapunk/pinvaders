@@ -2,6 +2,8 @@ require "pinvaders/version"
 require "pinvaders/game"
 require "pinvaders/background"
 require "pinvaders/star"
+require "pinvaders/painter"
+require "pinvaders/version"
 require "curses"
 
 include Curses

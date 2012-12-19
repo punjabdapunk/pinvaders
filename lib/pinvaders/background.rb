@@ -4,42 +4,15 @@ module Pinvaders
       @white_dwarfs = []
       @giants       = []
       @super_giants = []
-      20.times do |i|
-        @white_dwarfs[i] = Star.new(:slow, :white_dwarf)
-        @white_dwarfs[i].pos(rand(Curses::cols), 0)
-      end
-      10.times do |i|
-        @giants[i] = Star.new(:pacey, :giant)
-        @giants[i].pos(rand(Curses::cols), 0)
-      end
-      5.times do |i|
-        @super_giants[i] = Star.new(:fast, :super_giant)
-        @super_giants[i].pos(rand(Curses::cols), 0)
-      end            
+      create_stars(20, @white_dwarfs, :slow, :white_dwarf)           
+      create_stars(10, @giants, :pacey, :giant)           
+      create_stars(5, @super_giants, :fast, :super_giant)           
     end
 
     def draw
-      @white_dwarfs.each do |star|
-        star.draw 
-        if not star.on_screen?
-          star.reset
-          star.pos(rand(Curses::cols), 0)
-        end
-      end
-      @giants.each do |star|
-        star.draw 
-        if not star.on_screen?
-          star.reset
-          star.pos(rand(Curses::cols), 0)
-        end
-      end
-      @super_giants.each do |star|
-        star.draw 
-        if not star.on_screen?
-          star.reset
-          star.pos(rand(Curses::cols), 0)
-        end
-      end            
+      draw_stars(@white_dwarfs)
+      draw_stars(@giants)
+      draw_stars(@super_giants)            
     end
 
     def update
@@ -54,6 +27,25 @@ module Pinvaders
 
     def cols
       Curses::cols
+    end
+
+    private
+
+    def create_stars(how_many, stars, speed, size)
+      how_many.times do |i|
+        stars[i] = Star.new(speed, size)
+        stars[i].pos(rand(Curses::cols), 0)
+      end      
+    end
+
+    def draw_stars(stars)
+      stars.each do |star|
+        star.draw 
+        if not star.on_screen?
+          star.reset
+          star.pos(rand(Curses::cols), 0)
+        end
+      end
     end
   end
 end
