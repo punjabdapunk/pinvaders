@@ -62,37 +62,73 @@ module Pinvaders
       addstr(' ')
       if on_screen?
         setpos(@y, @x)
-        @brush.blue { addstr(".") }
+        @brush.blue { addstr("*") }
       end
     end
 
     def draw_giant
       setpos(@y - 1, @x)
-      addstr(' ')
+      addstr('    ')
+      setpos(@y, @x)
+      addstr('    ')
+      setpos(@y + 1, @x)
+      addstr('    ')
+      setpos(@y + 2, @x)
+      addstr('    ')      
       if on_screen?
         setpos(@y, @x)
-        @brush.yellow { addstr('*') }
+        @brush.cyan{ addstr('_/\\_') }
+        if on_screen?(1)
+          setpos(@y + 1, @x) 
+          @brush.cyan{ addstr('\\  /') }
+        end
+        if on_screen?(2)
+          setpos(@y + 2, @x)
+          @brush.cyan{ addstr('/  \\') }
+        end
+        if on_screen?(3)
+          setpos(@y + 3, @x)
+          @brush.cyan{ addstr(' \/ ') }
+        end        
       end
     end
 
     def draw_super_giant
       setpos(@y - 1, @x)
-      addstr('   ')
+      addstr('        ')
       setpos(@y, @x)
-      addstr('   ')
+      addstr('        ')
       setpos(@y + 1, @x)
-      addstr('   ')
+      addstr('        ')
+      setpos(@y + 2, @x)
+      addstr('        ')
+      setpos(@y + 3, @x)
+      addstr('        ')
+      setpos(@y + 4, @x)
+      addstr('        ')                  
       if on_screen?
         setpos(@y, @x)
-        @brush.magenta{ addstr('\\|/') }
+        @brush.white{ addstr('   /\\   ') }
         if on_screen?(1)
           setpos(@y + 1, @x) 
-          @brush.magenta{ addstr('-o-') }
+          @brush.white{ addstr('__/  \\__') }
         end
         if on_screen?(2)
           setpos(@y + 2, @x)
-          @brush.magenta{ addstr('/|\\') }
+          @brush.white{ addstr('\\      /') }
         end
+        if on_screen?(3)
+          setpos(@y + 3, @x)
+          @brush.white{ addstr('/_    _\\') }
+        end
+        if on_screen?(4)
+          setpos(@y + 4, @x)
+          @brush.white{ addstr('  \  /  ') }
+        end
+        if on_screen?(5)
+          setpos(@y + 5, @x)
+          @brush.white{ addstr('   \/   ') }
+        end                        
       end
     end
   end
