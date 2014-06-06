@@ -8,6 +8,7 @@ module Pinvaders
       init_pair(5, COLOR_RED, COLOR_BLACK)
       init_pair(6, COLOR_WHITE, COLOR_BLACK)
       init_pair(7, COLOR_YELLOW, COLOR_BLACK)
+      init_pair(8, COLOR_BLACK, COLOR_BLACK)
     end
 
     def blue
@@ -52,10 +53,20 @@ module Pinvaders
       }      
     end
 
+    def black
+      attron(color_pair(8|Curses::A_STANDOUT)) {
+        yield
+      }      
+    end
+
     def paint(index)
       attron(color_pair(index|Curses::A_STANDOUT)) {
         yield
       }
+    end
+
+    def background
+      bkgd(color_pair(8|Curses::A_STANDOUT))
     end
   end
 end

@@ -4,6 +4,7 @@ require "pinvaders/background"
 require "pinvaders/star"
 require "pinvaders/painter"
 require "pinvaders/version"
+require "pinvaders/viewport"
 require "curses"
 
 include Curses

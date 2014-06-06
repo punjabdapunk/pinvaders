@@ -6,33 +6,35 @@ module Pinvaders
       curs_set(0)
       noecho
       stdscr.keypad(true)
+      stdscr.nodelay = 1
 
       if has_colors?
         start_color
         use_default_colors
       end
 
-      @lines = Curses::lines
-      @cols  = Curses::cols
-
-      @background = Background.new
+      @vp = Viewport.new
+      @bg = Background.new(@vp)
     end
 
     def do_loop
       begin
         loop do
-          @background.draw
-          @background.update
-          @background.refresh
-          if @background.cols != @cols
-            @background = nil
-            @background = Background.new
-            @cols = @background.cols
-            clear
-          end     
-          #key = getch
+          key = getch
 
-          sleep(1.0 / 48.0) #48 frames per second
+          @vp.set_up_screen
+          @bg.draw
+
+          #if @background.cols != @width
+            #@background = nil
+            #@background = Background.new
+            #@cols = @background.cols
+            #clear
+          #end
+
+          sleep(1.0 / 60.0) # frames per second
+
+          @vp.refresh
         end
       ensure
         close_screen
