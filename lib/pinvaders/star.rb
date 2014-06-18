@@ -6,25 +6,24 @@ module Pinvaders
       @type = type
 
       case speed
-      when :slow  then @brake = 6
-      when :pacey then @brake = 3
-      when :fast  then @brake = 1
+      when :slow  then @brake = 25
+      when :pacey then @brake = 10
+      when :fast  then @brake = 5
       end
 
       case @type
       when :white_dwarf then @height = 1
-      when :giant       then @height = 4
+      when :giant       then @height = 3
       when :super_giant then @height = 6
-      end 
+      end
 
-      @brush = Painter.new
+      @brush = Painter.new(@vp)
       reset
     end
 
     def reset
       @x = 0
       @y = 0
-      @lag = rand(@vp.height * 10)
       @brake_count = @brake
     end
 
@@ -34,94 +33,53 @@ module Pinvaders
     end
 
     def scroll_y
-      @y += 1 if display?
+      @y += 1 if @brake_count == 0
     end
 
     def draw
-      if display?
-        case @type
-        when :white_dwarf then draw_white_dwarf
-        when :giant       then draw_giant
-        when :super_giant then draw_super_giant
-        end
+      case @type
+      when :white_dwarf then draw_white_dwarf
+      when :giant       then draw_giant
+      when :super_giant then draw_super_giant
       end
 
-      if on_screen?
-        @lag = (@lag > 0) ? @lag - 1 : 0
-        if @lag == 0
-          @brake_count = (@brake_count == 0) ? @brake : @brake_count - 1
-        end
-      end
+      @brake_count = (@brake_count == 0) ? @brake : @brake_count - 1
     end
 
     def scrolled_off?
-      (@y - @height + 1 > @vp.y_end)
-    end
-
-    def on_screen?(offset = 0)
-      (@y + offset <= @vp.y_end)
-    end
-
-    def display?
-      ((@lag == 0) and (@brake_count == 0))
+      @y > @vp.y_end
     end
 
     private
 
     def draw_white_dwarf
-      @vp.move(@y - 1, @x)
-      @vp.draw(" ")
-      if on_screen?
-        @vp.move(@y, @x)
-        @vp.draw("*")
-        #@brush.blue { addstr("*") }
-      end
+      @vp.move(@x, @y)
+      @brush.white { @vp.draw(".") }
     end
 
     def draw_giant
-      if on_screen?(-3)
-        setpos(@y - 3, @x)
-        @brush.cyan{ addstr('_/\\_') }
-      end
-      if on_screen?(-2)
-        setpos(@y - 2, @x) 
-        @brush.cyan{ addstr('\\  /') }
-      end
-      if on_screen?(-1)
-        setpos(@y - 1, @x)
-        @brush.cyan{ addstr('/  \\') }
-      end
-      if on_screen?
-        setpos(@y, @x)
-        @brush.cyan{ addstr(' \/ ') }
-      end
+      @vp.move(@x, @y)
+      @brush.cyan{ @vp.draw(' \\ / ') }
+      @vp.move(@x, @y + 1)
+      @brush.cyan{ @vp.draw('--*--') }
+      @vp.move(@x, @y + 2)
+      @brush.cyan{ @vp.draw(' / \\ ') }
     end
 
     def draw_super_giant
-      if on_screen?
-        setpos(@y, @x)
-        @brush.white{ addstr('   /\\   ') }
-        if on_screen?(1)
-          setpos(@y + 1, @x) 
-          @brush.white{ addstr('__/  \\__') }
-        end
-        if on_screen?(2)
-          setpos(@y + 2, @x)
-          @brush.white{ addstr('\\      /') }
-        end
-        if on_screen?(3)
-          setpos(@y + 3, @x)
-          @brush.white{ addstr('/_    _\\') }
-        end
-        if on_screen?(4)
-          setpos(@y + 4, @x)
-          @brush.white{ addstr('  \  /  ') }
-        end
-        if on_screen?(5)
-          setpos(@y + 5, @x)
-          @brush.white{ addstr('   \/   ') }
-        end
-      end
+     @vp.move(@x, @y)
+     @brush.blue{ @vp.draw('   /\\   ') }
+     @vp.move(@x, @y + 1)
+     @brush.blue{ @vp.draw('__/  \\__') }
+     @vp.move(@x, @y + 2)
+     @brush.blue{ @vp.draw('\\      /') }
+     @vp.move(@x, @y + 3)
+     @brush.blue{ @vp.draw('/_    _\\') }
+     @vp.move(@x, @y + 4)
+     @brush.blue{ @vp.draw('  \  /  ') }
+     @vp.move(@x, @y + 5)
+     @brush.blue{ @vp.draw('   \/   ') }
     end
+
   end
 end

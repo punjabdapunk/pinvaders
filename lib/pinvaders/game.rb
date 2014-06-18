@@ -1,5 +1,6 @@
 module Pinvaders
   class Game
+
     def initialize
       init_screen
       cbreak
@@ -25,20 +26,15 @@ module Pinvaders
           @vp.set_up_screen
           @bg.draw
 
-          #if @background.cols != @width
-            #@background = nil
-            #@background = Background.new
-            #@cols = @background.cols
-            #clear
-          #end
-
           sleep(1.0 / 60.0) # frames per second
 
           @vp.refresh
+          @vp.clear
         end
       ensure
         close_screen
       end
     end
+
   end
 end
