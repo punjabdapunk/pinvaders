@@ -7,7 +7,7 @@ module Pinvaders
       @white_dwarfs = []
       @giants       = []
       @super_giants = []
-      create_stars(25, @white_dwarfs, :slow, :white_dwarf)
+      create_stars(50, @white_dwarfs, :slow, :white_dwarf)
       create_stars(5, @giants, :pacey, :giant)
       create_stars(2, @super_giants, :fast, :super_giant)
     end

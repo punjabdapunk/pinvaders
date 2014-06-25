@@ -68,6 +68,10 @@ module Pinvaders
       }
     end
 
+    def rainbow(&block)
+      paint(1 + rand(7), &block )
+    end
+
     def background
       @vp.wo.bkgd(color_pair(8|Curses::A_STANDOUT))
     end

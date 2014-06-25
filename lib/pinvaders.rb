@@ -5,6 +5,8 @@ require "pinvaders/star"
 require "pinvaders/painter"
 require "pinvaders/version"
 require "pinvaders/viewport"
+require "pinvaders/keyboard"
+require "pinvaders/battleship"
 require "curses"
 
 include Curses
