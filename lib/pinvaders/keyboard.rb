@@ -1,7 +1,13 @@
 module Pinvaders
   class Keyboard
 
+    attr_accessor :key_state, :key
+
     def initialize
+      @key_state = :no_key
+    end
+
+    def reset
       @key_state = :no_key
     end
 

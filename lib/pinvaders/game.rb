@@ -16,23 +16,26 @@ module Pinvaders
 
       @vp = Viewport.new
       @bg = Background.new(@vp)
+      @bc = BattleshipController.new(@vp)
       @kb = Keyboard.new
-      @bs = Battleship.new(@vp)
     end
 
     def do_loop
       begin
         loop do
           @kb.poll
+          @vp.move(30, 1)
+          @vp.draw(@kb.key.to_s)
 
           @vp.set_up_screen
           @bg.draw
-          @bs.draw
+          @bc.process_key(@kb.key_state)
 
           sleep(1.0 / 60.0) # frames per second
 
           @vp.refresh
           @vp.clear
+          @kb.reset
         end
       ensure
         close_screen
