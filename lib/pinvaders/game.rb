@@ -8,6 +8,8 @@ module Pinvaders
       noecho
       stdscr.keypad(true)
       stdscr.nodelay = 1
+      mouseinterval(1)
+      mousemask(BUTTON1_RELEASED)
 
       if has_colors?
         start_color

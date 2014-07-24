@@ -18,6 +18,9 @@ module Pinvaders
 
     def set_key_state
       case @key
+      when KEY_MOUSE
+        m = getmouse
+        @key_state = :fire
       when ?Q, ?q
         @key_state = :quit
       when ?P, ?p
@@ -26,8 +29,8 @@ module Pinvaders
         @key_state = :left
       when ?D, ?d
         @key_state = :right
-      when ?K, ?k
-        @key_state = :fire
+      else
+        @key_state = :no_key
       end
     end
 

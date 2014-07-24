@@ -8,6 +8,7 @@ require "pinvaders/viewport"
 require "pinvaders/keyboard"
 require "pinvaders/battleship_controller"
 require "pinvaders/battleship"
+require "pinvaders/missile"
 require "curses"
 
 include Curses
