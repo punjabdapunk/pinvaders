@@ -1,10 +1,11 @@
 module Pinvaders
   class BattleshipController
+
     attr_accessor :vp, :bs, :missiles, :missile_key
 
-    def initialize(vp)
-      @vp = vp
-      @bs = Battleship.new(@vp)
+    def initialize(args)
+      @vp = args[:vp]
+      @bs = Battleship.new({:vp => @vp})
       @missiles = {}
       @missile_key = 0
     end
@@ -16,19 +17,17 @@ module Pinvaders
       when :right
         @bs.move_right
       when :fire
-        m = Missile.new(@vp)
+        m = Missile.new({:vp => @vp})
         m.x = @bs.centre_axis
         m.y = @bs.y
 
         @missile_key += 1
         @missiles.merge!(@missile_key => m)
       end
-
-      @bs.draw
-      draw_missiles
     end
 
-    def draw_missiles
+    def draw
+      @bs.draw
       @missiles.each { |k, m|
         m.on_screen ? m.move_up : @missiles.delete(k)
         m.draw

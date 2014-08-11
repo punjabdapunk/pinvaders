@@ -1,15 +1,16 @@
 module Pinvaders
   class Background
 
-    def initialize(vp)
-      @vp = vp
+    def initialize(args)
+      @vp = args[:vp]
 
       @white_dwarfs = []
       @giants       = []
       @super_giants = []
-      create_stars(50, @white_dwarfs, :slow, :white_dwarf)
-      create_stars(5, @giants, :pacey, :giant)
-      create_stars(2, @super_giants, :fast, :super_giant)
+
+      build_stars(50, @white_dwarfs, StarWhiteDwarf)
+      build_stars(5, @giants, StarGiant)
+      build_stars(2, @super_giants, StarSuperGiant)
     end
 
     def draw
@@ -21,9 +22,9 @@ module Pinvaders
 
     private
 
-    def create_stars(how_many, stars, speed, size)
+    def build_stars(how_many, stars, star_class)
       how_many.times do |i|
-        stars[i] = Star.new(@vp, speed, size)
+        stars[i] = star_class.new({:vp => @vp})
         stars[i].pos(rand_xpos, rand_ypos)
       end
     end

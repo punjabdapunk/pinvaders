@@ -6,8 +6,8 @@ module Pinvaders
     H = 4
     W = 9
 
-    def initialize(vp)
-      @vp = vp
+    def initialize(args)
+      @vp = args[:vp]
       @x = ( @vp.x_end / 2 ) - (W / 2)
       @y = @vp.y_end - H
 

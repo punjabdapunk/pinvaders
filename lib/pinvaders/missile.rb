@@ -6,8 +6,8 @@ module Pinvaders
     H = 1
     W = 1
 
-    def initialize(vp)
-      @vp = vp
+    def initialize(args)
+      @vp = args[:vp]
       @x = 0
       @y = 0
 

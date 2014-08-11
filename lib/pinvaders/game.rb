@@ -9,7 +9,7 @@ module Pinvaders
       stdscr.keypad(true)
       stdscr.nodelay = 1
       mouseinterval(1)
-      mousemask(BUTTON1_RELEASED)
+      mousemask(BUTTON1_CLICKED)
 
       if has_colors?
         start_color
@@ -17,8 +17,9 @@ module Pinvaders
       end
 
       @vp = Viewport.new
-      @bg = Background.new(@vp)
-      @bc = BattleshipController.new(@vp)
+      @bg = Background.new({:vp => @vp})
+      @bsc = BattleshipController.new({:vp => @vp})
+      @bmc = BattlementController.new({:vp => @vp})
       @kb = Keyboard.new
     end
 
@@ -26,12 +27,14 @@ module Pinvaders
       begin
         loop do
           @kb.poll
-          @vp.move(30, 1)
-          @vp.draw(@kb.key.to_s)
-
           @vp.set_up_screen
+
           @bg.draw
-          @bc.process_key(@kb.key_state)
+
+          @bsc.process_key(@kb.key_state)
+          @bsc.draw
+
+          @bmc.draw
 
           sleep(1.0 / 60.0) # frames per second
 
