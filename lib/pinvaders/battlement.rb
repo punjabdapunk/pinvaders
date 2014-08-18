@@ -6,15 +6,15 @@ module Pinvaders
     H = 5
     W = 20
 
-    @@hight = H
     @@width = W
-
-    def self.height
-      @@height
-    end
+    @@height = H
 
     def self.width
       @@width
+    end
+
+    def self.height
+      @@height
     end
 
     def initialize(args)

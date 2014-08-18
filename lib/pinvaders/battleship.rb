@@ -6,6 +6,17 @@ module Pinvaders
     H = 4
     W = 9
 
+    @@width = W
+    @@height = H
+
+    def self.width
+      @@width
+    end
+
+    def self.height
+      @@height
+    end
+
     def initialize(args)
       @vp = args[:vp]
       @x = ( @vp.x_end / 2 ) - (W / 2)

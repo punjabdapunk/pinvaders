@@ -5,9 +5,18 @@ module Pinvaders
 
     def initialize(args)
       @vp = args[:vp]
-      @b1 = Battlement.new({:vp => @vp, :x => @vp.x_start + 10, :y => 23})
-      @b2 = Battlement.new({:vp => @vp, :x => 60, :y => 23})
-      @b3 = Battlement.new({:vp => @vp, :x => @vp.x_end - Battlement.width - 10, :y => 23})
+      @b1 = Battlement.new({ :vp => @vp,
+                             :x  => @vp.x_start + 15,
+                             :y  => @vp.height - Battleship.height - Battlement.height - 4
+                           })
+      @b2 = Battlement.new({ :vp => @vp,
+                             :x  => (@vp.width - Battlement.width) / 2,
+                             :y  => @vp.height - Battleship.height - Battlement.height - 4
+                           })
+      @b3 = Battlement.new({ :vp => @vp,
+                             :x  => @vp.x_end - Battlement.width - 15,
+                             :y  => @vp.height - Battleship.height - Battlement.height - 4
+                           })
     end
 
     def draw
