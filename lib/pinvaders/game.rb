@@ -18,7 +18,7 @@ module Pinvaders
 
       @vp = Viewport.new
       @bg = Background.new({:vp => @vp})
-      @sp = Splash.new
+      @sp = Splash.new({:vp => @vp})
       @bsc = BattleshipController.new({:vp => @vp})
       @bmc = BattlementController.new({:vp => @vp})
       @kb = Keyboard.new
@@ -41,14 +41,11 @@ module Pinvaders
             @bmc.draw
           end
 
-          @vp.move(5,5)
-          @vp.draw('game_state: ' + @kb.game_state.to_s + ' key_state: ' + @kb.key_state.to_s)
           @vp.refresh if screen_active(@kb.game_state)
 
           sleep(1.0 / 60.0) # frames per second
 
           @vp.clear if screen_active(@kb.game_state)
-
           @kb.clear_key_state
 
         end until @kb.game_state == :exit
