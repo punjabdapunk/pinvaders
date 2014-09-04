@@ -14,6 +14,7 @@ require "pinvaders/battleship"
 require "pinvaders/battlement_controller"
 require "pinvaders/battlement"
 require "pinvaders/missile"
+require "pinvaders/splash"
 require "curses"
 
 include Curses
