@@ -20,8 +20,6 @@ module Pinvaders
       update
     end
 
-    private
-
     def build_stars(how_many, stars, star_class)
       how_many.times do |i|
         stars[i] = star_class.new({:vp => @vp})

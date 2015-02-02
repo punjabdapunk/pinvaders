@@ -45,7 +45,7 @@ module Pinvaders
 
       when :splash
         case @key
-        when 'X', 'x'
+        when 'Q', 'q'
           @key_state = :no_key
           @game_state = :exit
         when ' '

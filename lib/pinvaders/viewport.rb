@@ -89,5 +89,9 @@ module Pinvaders
       @h - 2
     end
 
+    def centre
+      width / 2
+    end
+
   end
 end
